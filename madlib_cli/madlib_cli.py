@@ -1,3 +1,5 @@
+import os
+
 welcome_logo = """
 ███╗   ███╗ █████╗ ██████╗ ██╗     ██╗██████╗ 
 ████╗ ████║██╔══██╗██╔══██╗██║     ██║██╔══██╗
@@ -43,9 +45,26 @@ print(welcome_message)
 #   pass
 # else:
 
-def read_file(path:str) -> str:
+def read_file(path:str='../assets/madlib.txt') -> str:
+  """[Function takes in a file and returns the contents of that file]
 
+  Args:
+      path (str, optional): [the path to the file you want to read]. Defaults to '../assets/madlib.txt'.
+
+  Returns:
+      str: [contents of the file]
+  """
   with open(path, 'r') as story:
     contents = story.read()
     return contents
 
+def write_to_new_file(contents:str=read_file()) -> bool:
+  try:
+    os.remove('../assets/madlibs_replaced')
+  except FileNotFoundError:
+    pass
+  
+  with open('../assets/madlibs_replced', 'w') as story:
+    story.write(contents)
+  
+  return True
