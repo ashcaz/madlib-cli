@@ -58,13 +58,22 @@ def read_file(path:str='../assets/madlib.txt') -> str:
     contents = story.read()
     return contents
 
-def write_to_new_file(contents:str=read_file()) -> bool:
+def write_to_new_file(contents:str=read_file()) -> str:
+  """[This function will take in the contents you input and write them to a temp file. It returns the PATH of the temp file. If something is already written in the file it will delete the file and create a new one. ]
+
+  Args:
+      contents (str, optional): [What you want to write into the temp file]. Defaults to read_file().
+
+  Returns:
+      str: [the PATH to the temp file]
+  """
+  tmp_file_path = '../assets/final_madlib'
   try:
-    os.remove('../assets/madlibs_replaced')
+    os.remove(tmp_file_path)
   except FileNotFoundError:
     pass
   
   with open('../assets/madlibs_replced', 'w') as story:
     story.write(contents)
   
-  return True
+  return tmp_file_path
