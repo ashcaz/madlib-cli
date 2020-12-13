@@ -1,4 +1,5 @@
 import os
+import re
 
 welcome_logo = """
 ███╗   ███╗ █████╗ ██████╗ ██╗     ██╗██████╗ 
@@ -58,7 +59,37 @@ def read_file(path:str='../assets/madlib.txt') -> str:
     contents = story.read()
     return contents
 
-def write_to_new_file(contents:str=read_file()) -> str:
+def parse_file(content:str=read_file()) -> str:
+  """[The function takes in the contents of a file and finds all the words between curly brackes using re.findall()(regex) which returns all of those words in a list]
+
+  Args:
+      contents (str, optional): [Contents of a file]. Defaults to read_file().
+
+  Returns:
+      str: [Returns the content with the updated words]
+  """
+  ask_questions = True
+
+  while ask_questions:
+
+    find_word = re.search("(?<={).+?(?=})",content)
+    
+    if find_word == None:
+      ask_questions = False
+    else:
+      replace_word = input(f'Input {find_word.group(0)}: ')
+
+      if replace_word.lower() == 'quit':
+        return print('You have ended the game! Bye')
+
+      content = re.sub("{(.*?)}", replace_word, content,1)
+  
+  return content
+
+
+
+#I knew os would be what i had to import in order to remove a file but didnt know how to implemt it. Found try/except solution from https://thispointer.com/python-how-to-remove-a-file-if-exists-and-handle-errors-os-remove-os-ulink/
+def write_to_new_file(content:str=parse_file()) -> str:
   """[This function will take in the contents you input and write them to a temp file. It returns the PATH of the temp file. If something is already written in the file it will delete the file and create a new one. ]
 
   Args:
@@ -74,6 +105,9 @@ def write_to_new_file(contents:str=read_file()) -> str:
     pass
   
   with open('../assets/madlibs_replced', 'w') as story:
-    story.write(contents)
+    story.write(content)
   
-  return tmp_file_path
+  return content
+
+
+print(f'\n\n{write_to_new_file()}')

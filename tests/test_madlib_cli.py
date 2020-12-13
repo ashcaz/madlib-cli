@@ -11,5 +11,10 @@ def test_read_file_test_output():
 
 def test_write_to_new_file_test_output():
   actual = write_to_new_file(read_file('../assets/test_text.txt'))
-  expected = True
+  expected = '../assets/final_madlib'
+  assert actual == expected 
+
+def test_parse_file():
+  actual = parse_file(read_file('../assets/test_text.txt'))
+  expected = 'I the funny and slow Ashley'
   assert actual == expected 
