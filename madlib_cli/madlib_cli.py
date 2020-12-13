@@ -21,11 +21,11 @@ welcome_message = """
 **  This game will prompt you for  **
 **  words (Nouns, verbs, adj &     **
 **  adverbs) for our fill-in-the-  **
-**   blank stories. When you are   **
+** blank stories.When you are done **
 **  entering all the words MADLIB  **
 **   will print out a strange,     **
 **  hilarious, and original story  **
-**  for you to read!               **
+**       for you to read!          **
 **                                 **
 **    Type in 'YES' to begin!!     **
 **                                 **
@@ -42,3 +42,10 @@ print(welcome_message)
 # if ready_to_start.lower() is 'yes':
 #   pass
 # else:
+
+def read_file(path:str) -> str:
+
+  with open(path, 'r') as story:
+    contents = story.read()
+    return contents
+
