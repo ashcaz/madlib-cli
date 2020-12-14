@@ -69,7 +69,27 @@ def parse_template(content:str):
     
   return content, stripped_words
 
+def get_user_inputs(stripped_words: tuple) -> tuple:
+  """[This function stakes the words stripped out of the content and replaces each word with user input]
 
+  Args:
+      stripped_words (tuple): [the words stripped from the content]
+
+  Returns:
+      tuple: [words to be replaced in the content]
+  """
+
+  user_input_list = []
+
+  for word in stripped_words:
+    user_input = input(f'Input {word}: ')
+
+    if user_input.lower() == 'quit':
+      return print('You have ended the game! Bye')
+    else:
+      user_input_list.append(user_input)
+
+  return tuple(user_input_list)
 
 # #I knew os would be what i had to import in order to remove a file but didnt know how to implemt it. Found try/except solution from https://thispointer.com/python-how-to-remove-a-file-if-exists-and-handle-errors-os-remove-os-ulink/
 
@@ -84,12 +104,7 @@ def merge(content:str,tuple_of_words: tuple) -> str:
       str: [The content with newly replaced words from user input]
   """
   for word in tuple_of_words:
-    user_input = input(f'Input {word}: ')
-
-    if user_input.lower() == 'quit':
-      return print('You have ended the game! Bye')
-    else:
-      content = re.sub("{(.*?)}", user_input, content, 1)
+    content = re.sub("{(.*?)}", word, content, 1)
       
   return content
   
