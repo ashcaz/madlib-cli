@@ -6,13 +6,6 @@ from  madlib_cli.madlib import read_template, parse_template,merge, write_templa
 def test_version():
     assert __version__ == '0.1.0'
 
-
-def test_write_template_output():
-  actual = write_template("It was a {Adjective} and {Adjective} {Noun}.")
-  expected = '../assets/final_madlib'
-  assert actual == expected 
-
-
 def test_read_template_returns_stripped_string():
     actual = read_template("../assets/dark_and_stormy_night.txt")
     expected = "It was a {Adjective} and {Adjective} {Noun}."
@@ -41,3 +34,8 @@ def test_read_template_raises_exception_with_bad_path():
     with pytest.raises(FileNotFoundError):
         path = "missing.txt"
         read_template(path)
+
+def test_write_template_output():
+  actual = write_template("It was a {Adjective} and {Adjective} {Noun}.")
+  expected = '../assets/final_madlib.txt'
+  assert actual == expected 

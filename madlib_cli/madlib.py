@@ -118,13 +118,13 @@ def write_template(content:str) -> str:
   Returns:
       str: [return the temp file path]
   """
-  tmp_file_path = '../assets/final_madlib'
+  tmp_file_path = '../assets/final_madlib.txt'
   try:
     os.remove(tmp_file_path)
   except FileNotFoundError:
     pass
 
-  with open('../assets/final_madlib', 'w') as story:
+  with open('../assets/final_madlib.txt', 'w') as story:
      story.write(content)
 
   return tmp_file_path
@@ -132,7 +132,9 @@ def write_template(content:str) -> str:
 
 print(welcome_logo)
 print(welcome_message)
-content,stripped_words = parse_template(read_template('../assets/madlib.txt'))
-new_content = merge(content,stripped_words)
+read_template('../assets/madlib.txt')
+content, stripped_words = parse_template(read_template('../assets/madlib.txt'))
+new_words = get_user_inputs(stripped_words)
+new_content = merge(content,new_words)
 write_template(new_content)
 print(new_content)
