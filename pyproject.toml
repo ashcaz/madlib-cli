@@ -6,9 +6,11 @@ authors = ["Ashley Casimir <ashcas@me.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pytest = "^6.2.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pylint = "^2.6.0"
+
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
